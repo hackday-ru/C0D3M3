@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Networking;
 using IronPython.Hosting;
 using IronPython.Runtime;
 using Microsoft.Scripting.Hosting;
@@ -11,6 +12,7 @@ public static class Interpret
     private static ScriptScope scope;
     private static ScriptSource source;
 
+    
     public static void Init(MonoBehaviour self) {
         if (engine == null || scope == null) {
             engine = Python.CreateEngine();
@@ -29,7 +31,6 @@ public static class Interpret
 
         try {
             source = engine.CreateScriptSourceFromString(code);
-
             source.Execute(scope);
         } catch (Exception e) {
             Debug.LogError(e);
